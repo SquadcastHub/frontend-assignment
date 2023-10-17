@@ -1,0 +1,9 @@
+.pinned-msg-div{
+    background-color: #2AAA8A;
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
