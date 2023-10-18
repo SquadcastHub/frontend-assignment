@@ -78,7 +78,6 @@ const CustomInputField = (props: {
           }}
           onKeyDown={(e) => handleKeyDown(e)}
         ></input>
-        {/* <span className="input-field-span">Ctrl + /</span> */}
       </div>
       <div className="filter-data-container">
         {toggle &&
