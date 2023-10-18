@@ -10,14 +10,11 @@ const CustomInputField = (props: {
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [filteredSearch, setFilteredSearch] = useState("");
-  window.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && event.key === "/") textRef.current;
-  });
 
   const ref = useRef<Array<HTMLDivElement | null>>([]);
-  const textRef = useRef(null);
 
   useEffect(() => {
+    // console.log(search);
     if (toggle) {
       const v = search.toLowerCase().split("@");
       setFilteredSearch(v[v.length - 1]);
@@ -32,7 +29,7 @@ const CustomInputField = (props: {
     gender: string;
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "@") {
       setSearch(search + " ");
       setToggle(true);
@@ -44,15 +41,15 @@ const CustomInputField = (props: {
   };
 
   const handleClick = (id: number) => {
-    if (ref.current[id] != undefined)
+    if (ref.current[id] != undefined) {
       setSearch(
         search.substring(0, search.lastIndexOf("@") + 1) +
           ref.current[id]?.textContent +
           " "
       );
+    }
     setToggle(false);
     setFilteredSearch("");
-    textRef.current;
   };
 
   const FilteredSearch = ({ id, first_name, last_name }: dataProps) => {
@@ -72,14 +69,16 @@ const CustomInputField = (props: {
     <div className="input-element">
       <div className="input-bar">
         <input
-          ref={textRef}
+          ref={(inp) => {
+            inp?.focus();
+          }}
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
           }}
           onKeyDown={(e) => handleKeyDown(e)}
         ></input>
-        <span className="input-field-span">Ctrl + /</span>
+        {/* <span className="input-field-span">Ctrl + /</span> */}
       </div>
       <div className="filter-data-container">
         {toggle &&
